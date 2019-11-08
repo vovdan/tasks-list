@@ -1,0 +1,10 @@
+.tablee{
+    border: 1px solid gray;
+    border-spacing: 20px;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+.tr,td{
+    text-align: center;
+}
