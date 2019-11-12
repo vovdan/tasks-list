@@ -4,54 +4,54 @@ import Form from '../form/form';
 
 class App extends Component {
     state = {
-        characters: []
+        tasks: []
     };
 
-    doneCharacter = index => {
-        const { characters } = this.state;
+    donetask = index => {
+        const { tasks } = this.state;
         this.setState({
-            characters: characters.filter((character, i) => {
+            tasks: tasks.filter((task, i) => {
                 if (i !== index) {
                     return true
                 }
                 if (i === index) {
                     var utc = new Date().toLocaleString();
-                    character.end = utc;
-                    character.done='hidden';
-                    console.log(character.done);
+                    task.end = utc;
+                    task.done='hidden';
+                    console.log(task.done);
                     return true
                 }
             })
         })
     }
-    removeCharacter = index => {
-        const { characters } = this.state;
+    removetask = index => {
+        const { tasks } = this.state;
 
         this.setState({
-            characters: characters.filter((character, i) => {
+            tasks: tasks.filter((task, i) => {
                 return i !== index;
             })
         });
     }
 
-    handleSubmit = character => {
-        this.setState({ characters: [...this.state.characters, character] });
+    handleSubmit = task => {
+        this.setState({ tasks: [...this.state.tasks, task] });
 
     }
 
     render() {
-        const { characters } = this.state;
+        const { tasks } = this.state;
 
         return (
             <div className="container">
-                <h1>Tasks list</h1>
+                <h1 style={{textAlign: "center"}}>Tasks list</h1>
 
                 <Table
-                    characterData={characters}
-                    removeCharacter={this.removeCharacter}
-                    doneCharacter={this.doneCharacter}
+                    taskData={tasks}
+                    removetask={this.removetask}
+                    donetask={this.donetask}
                 />
-                <h3>Add New</h3>
+                <h3 style={{marginLeft: "5%"}}>Add New</h3>
                 <Form handleSubmit={this.handleSubmit} />
             </div>
         );

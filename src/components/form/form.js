@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './form.css';
 
 class Form extends Component {
     constructor(props) {
@@ -7,9 +8,9 @@ class Form extends Component {
         this.initialState = {
             name: '',
             description: '',
-            start:'',
-            end:'',
-            done:'visible'
+            start: '',
+            end: '',
+            done: 'visible'
         };
 
         this.state = this.initialState;
@@ -17,7 +18,7 @@ class Form extends Component {
 
     handleChange = event => {
         const { name, value } = event.target;
-        var utc =  new Date().toLocaleString();
+        var utc = new Date().toLocaleString();
         this.setState({
             [name]: value,
             start: utc
@@ -35,19 +36,23 @@ class Form extends Component {
         const { name, description } = this.state;
 
         return (
-            <form onSubmit={this.onFormSubmit}>
-                <label>Name</label>
-                <input
-                    type="text"
-                    name="name"
-                    value={name}
-                    onChange={this.handleChange} />
-                <label>Description</label>
-                <input
-                    type="text"
-                    name="description"
-                    value={description}
-                    onChange={this.handleChange} />
+            <form className='form' onSubmit={this.onFormSubmit}>
+                <p>
+                    <label style={{magrin: '2px'}}>Name</label><br />
+                    <textarea
+                        type="text"
+                        name="name"
+                        value={name}
+                        onChange={this.handleChange} />
+                </p>
+                <p>
+                    <label style={{magrin: "20px"}}>Description</label><br />
+                    <textarea style={{height: "100px"}}
+                        type="text"
+                        name="description"
+                        value={description}
+                        onChange={this.handleChange} />
+                </p>
                 <button type="submit">
                     Submit
                 </button>

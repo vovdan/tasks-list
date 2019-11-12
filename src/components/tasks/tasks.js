@@ -17,15 +17,15 @@ const TableHeader = () => {
 }
 
 const TableBody = props => { 
-    const rows = props.characterData.map((row, index) => {
+    const rows = props.taskData.map((row, index) => {
         return (
             <tr key={index}>
                 <td>{row.name}</td>
                 <td>{row.description}</td>
                 <td>{row.start}</td>
                 <td>{row.end}</td>
-                <td><button onClick={() => props.removeCharacter(index)}>Delete</button></td>
-                <td><button style={{visibility:row.done}} onClick={() => props.doneCharacter(index)}>Done</button></td>
+                <td><button onClick={() => props.removetask(index)}>Delete</button></td>
+                <td><button style={{visibility:row.done}} onClick={() => props.donetask(index)}>Done</button></td>
             </tr>
         );
     });
@@ -35,12 +35,12 @@ const TableBody = props => {
 
 class Table extends Component {
     render() {
-        const { characterData, removeCharacter, doneCharacter } = this.props;
+        const { taskData, removetask, donetask } = this.props;
 
         return (
-            <table className='tablee'>
+            <table className='fixed'>
                 <TableHeader />
-                <TableBody characterData={characterData} removeCharacter={removeCharacter} doneCharacter={doneCharacter} />
+                <TableBody taskData={taskData} removetask={removetask} donetask={donetask} />
             </table>
         );
     }
