@@ -3,8 +3,11 @@ import "./signin.css";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import axios from 'axios';
 import { useAuth } from "../../context/auth";
-import { BrowserRouter as Router, Link, Route, Redirect } from "react-router-dom";
-import Signup from '../signup/signup';
+import { useHistory } from "react-router-dom";
+import {useAuthService} from '../../services/auth-service';
+
+const { useCallback } = React;
+
 
 function AuthForm() {
 
@@ -13,43 +16,40 @@ function AuthForm() {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const { setAuthTokens } = useAuth();
-
-
-  function submitSignIn() {
-    console.log("Sign in");
-    axios.post("http://localhost:8080/auth/signin", {
-      "username": userName,
-      "password": password
-    }).then(result => {
-      if (result.status === 200) {
-        console.log(2)
-        setAuthTokens(result.data);
-        setLoggedIn(true);
-        console.log("Success");
-      } else {
-        console.log(3)
-        setIsError(true);
-        console.log(result);
-      }
-    }).catch(e => {
-      console.log(4)
-      setIsError(true);
-      console.log("Catch er");
-    });
+  let history = useHistory();
+  
+  const auth = useAuthService();
+  const submitSignIn=()=> {
+    auth.signIn();
   }
 
-  // if (isLoggedIn) {
-  //   return <Redirect to="/tasks" />;
-  //   console.log("Redirectto");
-  // }
-
+    // console.log("Sign in");
+    // axios.post("http://localhost:8080/auth/signin", {
+    //   "username": userName,
+    //   "password": password
+    // }).then(result => {
+    //   if (result.status === 200) {
+    //     console.log(2, result);
+    //     setAuthTokens(result.data);
+    //     setLoggedIn(true);
+    //     history.push('/tasks')
+    //     console.log("Success");
+    //   } else {
+    //     setIsError(true);
+    //     console.log(result);
+    //   }
+    // }).catch(e => {
+    //   setIsError(true);
+    //   console.log("Catch er");
+    // });
+  
 
   function submitSignUp() {
-    return <Redirect to="/signup" />;
+    history.push('/signup')
   }
 
   return (
-    
+
     <div className="add-form">
       <form>
 
@@ -72,11 +72,11 @@ function AuthForm() {
             }} />
         </FormGroup>
 
-        <Button className='button' block type="submit" onClick={submitSignIn}>
+        <Button className='button' onClick={submitSignIn}>
           Sign in
         </Button><br />
 
-        <Button className='button' block type="submit" onClick={submitSignUp}>
+        <Button className='button' onClick={submitSignUp}>
           Sign up
         </Button>
       </form>

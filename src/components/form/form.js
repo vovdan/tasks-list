@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './form.css';
-
+import * as moment from 'moment';
 class Form extends Component {
     constructor(props) {
         super(props);
@@ -8,9 +8,11 @@ class Form extends Component {
         this.initialState = {
             name: '',
             description: '',
-            start: '',
-            end: '',
-            done: 'visible'
+            file: '',
+            startsAt: '',
+            endsAt: null,
+            type: '',
+            location: ''
         };
 
         this.state = this.initialState;
@@ -18,10 +20,13 @@ class Form extends Component {
 
     handleChange = event => {
         const { name, value } = event.target;
-        var utc = new Date().toLocaleString();
+        var utc = moment().format('YYYY-MM-DD HH:mm:ss');
         this.setState({
             [name]: value,
-            start: utc
+            startsAt:  utc,
+            type: "notification",
+            location: "saint p",
+            file : "file",
         });
     }
 

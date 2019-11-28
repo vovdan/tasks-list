@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './tasks.css';
+import * as moment from 'moment';
 
 const TableHeader = () => { 
     return (
@@ -22,10 +23,10 @@ const TableBody = props => {
             <tr key={index}>
                 <td>{row.name}</td>
                 <td>{row.description}</td>
-                <td>{row.start}</td>
-                <td>{row.end}</td>
-                <td><button onClick={() => props.removetask(index)}>Delete</button></td>
-                <td><button style={{visibility:row.done}} onClick={() => props.donetask(index)}>Done</button></td>
+                <td>{moment(row.startsAt).format('LLL')}</td>
+                <td>{row.endsAt!=null?moment(row.endsAt).format('LLL'):''}</td>
+                <td><button onClick={() => props.removetask(row.id)}>Delete</button></td>
+                <td><button style={{visibility:row.endsAt ? 'hidden' : 'visible'}} onClick={() => props.donetask(row)}>Done</button></td>
             </tr>
         );
     });

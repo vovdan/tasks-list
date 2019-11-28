@@ -3,7 +3,6 @@ import "./signup.css";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import axios from 'axios';
 import { useAuth } from "../../context/auth";
-import { Link, Redirect } from "react-router-dom";
 
 function Signup() {
 
@@ -39,7 +38,6 @@ function Signup() {
   return (
     <div className="add-form">
       <form>
-
         <FormGroup controlId="email">
           <FormControl
             className='email' placeholder="Email" type="email"

@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import AuthForm from './components/signin/signin';
+//import AuthForm from './components/signin/signin';
 import * as serviceWorker from './serviceWorker';
-import App from './components/app/app';
+//import App from './components/app/app';
 import FirstPage from './components/firstpage/firstpage';
 
 ReactDOM.render(<FirstPage />, document.getElementById('root'));
